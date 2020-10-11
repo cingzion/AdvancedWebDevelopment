@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active {
+            color: red;
+        }
+        .big{
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<!--
+    对象方式处理动态的样式
+        :class="{样式类名：响应式数据, ...}"
+        响应式数据为 true 则有这个样式类，反之则没有
+
+
+    数组控制样式类
+        :class="[响应式数据1, ....]"
+        控制响应式数据的值是对应的样式类或者没有值，来控制是否有这个样式
+-->
+<div id="app">
+    <h1>{{ msg }}</h1>
+    <!--<p :class="{active:a, big:true}">欢迎来到深圳，我是Jean~~~</p>-->
+
+    <p :class="[active, big]">欢迎来到深圳，我是Jean~~~</p>
+    <!-- 第一种方式   -->
+    <button @click="handle">切换样式</button>
+    <!-- 第二种方式   -->
+    <!--<button @click="a=!a">切换样式</button>-->
+    <button @click="handleActive">切换样式</button>
+</div>
+<!-- import js -->
+<!--  开发的时候尽可通用引用未压缩版本，这样有错误会抛出异常  -->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'Jean',
+            a: false,
+            active: '',
+            big: 'big',
+        },
+        methods: {
+            handle(){
+                this.a = !this.a;
+            },
+            handleActive() {
+                this.active = this.active === '' ? 'active' : '';
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>

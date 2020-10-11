@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>8-vue中的表单元素处理</title>
+</head>
+<body>
+
+<!--
+    单选或者复选按钮
+        1、按照 v-model 进行分组，单选框准备的数据是一具值，复选框准备的数据是一个数组
+        2、每一个框都有自己的 value, 谁被选中，数据值是被选中元素的 value 值； 相反，
+           值是多少，对应 value 的元素也会被轮动认选中;
+
+-->
+<div id="app">
+    <h1>姓别：</h1>
+    <label><input type="radio" value='0' v-model.number="sex" checked/>男</label>
+    <label><input type="radio" value='1' v-model.number="sex"/>女</label>
+    <div>
+        <button @click="submit">提交</button>
+    </div>
+
+    <h1>全选/非全选</h1>
+    <div @change="delegate">
+        <p><label><input type="checkbox" value="ok" v-model="all" @click="handleAll"/>全选/全不选</label></p>
+        <p><label><input type="checkbox" value="song" v-model="hobby" />唱歌</label></p>
+        <p><label><input type="checkbox" value="dance" v-model="hobby"/>跳舞</label></p>
+        <p><label><input type="checkbox" value="read" v-model="hobby"/>读书</label></p>
+        <p><label><input type="checkbox" value="javascript" v-model="hobby"/>编程</label></p>
+        <p><button @click="handleSub">提交</button></p>
+    </div>
+</div>
+
+<!-- import js -->
+<!--  开发的时候尽可通用引用未压缩版本，这样有错误会抛出异常  -->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            sex: 0,
+            hobby: ['javascript'],
+            all: ['ok'],
+        },
+        methods: {
+            submit() {
+                console.log(this.sex)
+            },
+            handleSub(){
+                console.log(this.hobby)
+            },
+            handleAll(){
+                // => click 事件处理比视图更新后数据的更改要先去做
+                if(!this.all.includes('ok')){
+                    this.hobby = ['song', 'dance', 'read', 'javascript'];
+                }else{
+                    this.hobby = [];
+                }
+            },
+            delegate(){
+                // => change 事件处理，要晚于数据更新
+                console.log(this.hobby)
+                this.all = this.hobby.length >= 4 ? ['ok'] : [];
+
+            }
+        }
+    });
+</script>
+</body>
+</html>

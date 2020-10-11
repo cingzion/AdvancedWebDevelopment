@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11-基于computed实现全选和非全选.html</title>
+</head>
+<body>
+
+<div id="app">
+    <label><input type="checkbox" v-model="selected"/>全选/非全选</label>
+    <hr/>
+    <span v-for="item in hobbyList">
+        <label :key="item.id | handleID"><input type="checkbox" :value="item.value" v-model="checkList"/>{{item.name}}</label>
+    </span>
+
+
+
+</div>
+
+<!-- import js -->
+<!--  开发的时候尽可通用引用未压缩版本，这样有错误会抛出异常  -->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            hobbyList: [
+                {
+                    id: 1,
+                    name: '唱歌',
+                    value: 'song',
+                },
+                {
+                    id: 2,
+                    name: '跳舞',
+                    value: 'dance',
+                },
+                {
+                    id: 3,
+                    name: '阅读',
+                    value: 'read',
+                },
+                {
+                    id: 4,
+                    name: '睡觉',
+                    value: 'sleep',
+                },
+            ],
+            // 存储选中的兴趣爱好
+            checkList: [],
+            // 存储全选按钮的选中状态
+            // selected: false,
+        },
+        computed: {
+            // 存储全选按钮的选中状态
+            selected: {
+                get() {
+                    return this.checkList.length === this.hobbyList.length;
+                },
+                set(value) {
+                    /**
+                     * =》 点击全选框会修改 selected 的值
+                     * =》 value 存储的是选中的状态
+                     */
+                    console.log(value)
+                    if(value) {
+                        this.hobbyList.forEach(item => {
+                            this.checkList.push(item.value);
+                        })
+                        return;
+                    }
+                    this.checkList = [];
+                },
+            }
+        },
+        // 过滤器
+        filters: {
+            handleID(value) {
+                return 'hobby'+value;
+            }
+        }
+    });
+
+
+</script>
+</body>
+</html>

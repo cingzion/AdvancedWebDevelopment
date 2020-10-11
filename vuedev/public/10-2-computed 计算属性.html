@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <p>正常的结果：{{ text }}</p>
+    <p>反转结果是：{{ reverseMethod() }}</p>
+    <p>反转结果是：{{ reverseComputed }}</p>
+    <p>{{ now2() }}</p>
+</div>
+
+<!-- import js -->
+<!--  开发的时候尽可通用引用未压缩版本，这样有错误会抛出异常  -->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+
+    const vm = new Vue({
+        /*
+         => 真实项目中： 我们一般用一个计算属性和某些响应式数据过行关联，响应式数据发生改变计算属性
+         的 getter 函数重新执行，否则使用的是上一次计算出来的缓存结果。
+         */
+        el: '#app',
+        data: {
+            text: 'MY NAME IS JEAN',
+        },
+        computed: {
+            // => getter 函数
+            reverseComputed() {
+                console.log('computed')
+                return this.text.split('').reverse().join('');
+            },
+            now1(){
+                // => 计算属性中必须要关联一个响应式数据，否则 getter 函数只执行一次
+                return new Date();
+            }
+        },
+        methods: {
+            reverseMethod(){
+                console.log('methods')
+                return this.text.split('').reverse().join('');
+            },
+            now2(){
+                // => 计算属性中必须要关联一个响应式数据，否则 getter 函数只执行一次
+                return new Date();
+            }
+        }
+    });
+
+    let n = 0;
+
+    let timer = setTimeout(() => {
+        // =》 强制更新视图的重新渲染
+        n++;
+        if(n > 5) {
+            clearInterval(timer);
+            return;
+        }
+
+        if(n === 3) {
+            vm.text = 'Welcome to Jean';
+            return;
+        }
+        vm.$forceUpdate();
+    }, 1000)
+
+</script>
+</body>
+</html>

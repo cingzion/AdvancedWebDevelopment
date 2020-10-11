@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        v-for: 循环动态绑定数据
+               想循环谁就给谁设置 v-for
+               循环类似 for/for in 的语法: v-for='(item, index) in arr'
+
+    -->
+    <div id="app">
+        <table>
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in arr">
+                    <td v-html='item.id' />
+                    <td v-html='item.name'/>
+                    <td v-html='item.age'/>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- import js -->
+    <!--  开发的时候尽可通用引用未压缩版本，这样有错误会抛出异常  -->
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                arr: [
+                    {id: 1, name: '张三', age: 25, },
+                    {id: 2, name: '李四', age: 24, },
+                    {id: 3, name: '王五', age: 26, },
+                ]
+            },
+            methods: {
+
+            }
+        });
+
+    </script>
+    <script>
+        // JS 中循环的几种方式： for循环、while循环、do while循环 | for in 循环 | for of 循环
+        let arr = [10, 20, 30, 40],
+            obj = { name: '深圳', year: 10, 1: 100};
+
+        Object.prototype.AA = 12;
+
+        // => ES6新增 for of 循环
+        // 1、获取的不是属性名是属性值
+        // 2、不会遍历原型上公有的属性方法(哪怕是自定义的)
+        /*for(let item of arr) {
+            console.log(item); // 是值
+        }*/
+        // 3、只能遍历被迭代的数据类型值(Symbol.iterator): Array, String、Arguments、NodeList、Set、Map等，但是普通对象不可能被迭代的数据，所以不能用 for of 循环
+
+        // new String("123456")
+            /*
+            0: "1"
+            1: "2"
+            2: "3"
+            3: "4"
+            4: "5"
+            5: "6"
+            */
+        /*for(let item of obj) {
+            console.log(item); // 是值
+        }*/
+
+        /*
+        6-vue的常规指令2.html:63 10
+        6-vue的常规指令2.html:63 20
+        6-vue的常规指令2.html:63 30
+        6-vue的常规指令2.html:63 40
+        */
+
+        // for in 循环
+        /*for (let key in arr) {
+            if (!obj.hasOwnProperty(key)) break;
+            console.log(key, arr[key]);
+        }*/
+
+        // for in 循环
+        /*for(let key in obj){
+            // => key 遍历的属性名
+            // => obj[key]属性值
+            // => 优先遍历属性名为数字的
+            // => 会把所属类原型上自定义的属性主就去也遍历到
+            // obj.hasOwnProperty(key) 判断这个 key 是不是 obj 私有的。
+            if(!obj.hasOwnProperty(key)) break;
+            console.log(key) // AA
+        }*/
+
+
+
+
+    </script>
+</body>
+</html>

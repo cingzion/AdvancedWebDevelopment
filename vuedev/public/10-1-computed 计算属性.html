@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <input type="text" v-model="text" />
+    <br>
+    <!--<span v-text="toUp(text)"></span>-->
+    <span v-text="toUP"></span>
+</div>
+
+<!-- import js -->
+<!--  开发的时候尽可通用引用未压缩版本，这样有错误会抛出异常  -->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            text: '',
+        },
+        computed: {
+            /**
+             *  => 计算属性：它不是方法是一个属性，所以在视图中调取的时候不能加括号执行
+             *
+             *  toUP 和 data 中和 text 一样，都会挂载到实例上, 这存储的值是对应方法
+             *  返回的结果 (getter 函数处理的结果)
+             *
+             *  => 计算属性有自己的缓存处理：第一次获取这个属性值，会把某个响应式数据(text),
+             *  当第一次结果获取后，会把这个结果缓存下来；后期视图重新渲染，首先看 text 值是
+             *  否发生更改，如果发生更改，会重新计算 toUP 属性值，如果没有更改，则还会拿上次
+             *  缓存的结果进行渲染；
+             *
+             */
+            toUP() {
+                return this.text.replace(/\b[a-zA-Z]+\b/g, item => {
+                    return item.charAt(0).toUpperCase() + item.substring(1);
+                });
+            }
+        },
+        methods: {
+             // 方法
+            /*toUp(value){
+                return value.replace(/\b[a-zA-Z]+\b/g, item => {
+                    return item.charAt(0).toUpperCase() + item.substring(1);
+                });
+            }*/
+        }
+    })
+
+</script>
+</body>
+</html>

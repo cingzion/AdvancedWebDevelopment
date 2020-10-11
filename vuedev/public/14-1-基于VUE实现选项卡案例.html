@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>14-基于VUE实现选项卡案例.html</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/minireset.css/0.0.2/minireset.min.css" rel="stylesheet">
+
+    <style>
+        .tabBox{
+            box-sizing: border-box;
+            margin: 20px auto;
+            width: 600px;
+        }
+
+        .tabBox .tab{
+            display: flex;
+            position: relative;
+            top: 1px;
+
+        }
+
+        .tabBox .tab li{
+            margin-right: 10px;
+            padding: 0 20px;
+            line-height: 35px;
+            border:1px solid #aaa;
+            background: #eee;
+            cursor: pointer;
+        }
+        .tabBox .tab li.active{
+            background: #FFF;
+            border-bottom-color: #FFF;
+        }
+
+        .tabBox .content {
+            display: none;
+            box-sizing: border-box;
+            padding: 10px;
+            height: 300px;
+            border: 1px solid #aaa;
+        }
+
+        .tabBox .content.active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1 v-html="msg"></h1>
+
+        <div class="tabBox">
+            <ul class="tab" @click="handleTab($event)">
+                <!--<li v-for="(item, index) in tabData" v-html="item.name" :class="{active: index === curIndex}" @click="curIndex=index"></li>-->
+                <li v-for="(item, index) in tabData" v-html="item.name" :class="{active: index === curIndex}" :index="index"></li>
+            </ul>
+            <div v-for="(item, index) in tabData" v-html="item.children" :class="{content: true, active: index === curIndex}">音乐的内容</div>
+
+        </div>
+
+    </div>
+    <!-- import js -->
+    <!--  开发的时候尽可通用引用未压缩版本，这样有错误会抛出异常  -->
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+
+        let tabData = [
+            {
+                id: 1,
+                name: '音乐',
+                children: '音乐的内容',
+            },
+            {
+                id: 2,
+                name: '影视',
+                children: '影视的内容',
+            },
+            {
+                id: 3,
+                name: '动漫',
+                children: '动漫的内容',
+            },
+            {
+                id: 4,
+                name: '记录版',
+                children: '记录版的内容',
+            },
+        ];
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'Hello Vue!',
+                // 选项卡数据
+                tabData,
+                // 展示选项卡的索引
+                curIndex: 0,
+            },
+            methods: {
+                handleTab(ev) {
+                    let target = ev.target,
+                        tarTag = target.tagName;
+                    console.log("===", ev.target)
+
+                    if(tarTag === 'LI') {
+                        this.curIndex = parseInt(target.getAttribute('index'));
+                    }
+                }
+            }
+        })
+
+    </script>
+
+</body>
+</html>

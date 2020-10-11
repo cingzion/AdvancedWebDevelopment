@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!--
+    v-on( 简写 @) : 用来实现事件绑定指令
+        v-on:click = 'xxx'
+        @click='xxx'
+        <button v-on:click="func" ></button>
+        <button @click="func" ></button>
+
+    1. 需事件触发的时候，需要传递参数信息，把方法加小括号，$event 是事件对象
+        v-on:click='sum($event, 10, 20)'
+         <button v-on:click="sum($event, 10, 20)" ></button>
+
+    2. 事件修饰符
+        常规修饰符： @click.prevent/stop = 'xxx'
+        按键修饰符： @keydown.enter/space/delete/up/right/down/left...='xxx'
+        键盘码： @keydown.13 = 'xxx'
+        组合按钮：@keydown.alt.67 = 'xxx' // => Alt+c
+-->
+<div id="app">
+    <!--  不能绑定多个事件  -->
+    <!--<button v-on:click="func" ></button>-->
+
+    <!--  $event 这是固定写法，指定当前的事件，后面其它的都是参数  -->
+    <!--<button v-on:click="sum($event, 10, 20)" ></button>-->
+
+    <!--<a href="http://www.baidu.com/" @click.prevent.stop="func">百度</a>-->
+
+    <!--<input type="text" placeholder="请输入搜索内容"  v-model="text" @keydown.enter="func"/>-->
+    <input type="text" placeholder="请输入搜索内容"  v-model="text" @keydown.alt.67="func"/>
+
+
+</div>
+
+<!-- import js -->
+<!--  开发的时候尽可通用引用未压缩版本，这样有错误会抛出异常  -->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            text: '',
+        },
+        methods: { // 方法区
+            /*func(ev) {
+                // ev.preventDefault(); //
+                console.log(); // this 就是当前实例
+            },*/
+            func(ev) {
+                /*if(ev.keyCode === 13){
+                    alert("中国深圳")
+                }*/
+                alert("中国深圳", this.text);
+
+
+            },
+            sum(ev, n, m){
+                console.log(arguments)
+            },
+        }
+    })
+</script>
+</body>
+</html>

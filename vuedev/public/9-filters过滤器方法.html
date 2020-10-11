@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课时9：filters过滤器方法</title>
+</head>
+<body>
+
+<!--
+
+-->
+
+<div id="app">
+    <input type="text" v-model="text" />
+    <br>
+    <!--<span v-text="text.replace(/\b[a-zA-Z]+\b/g, item => {
+        return item.charAt(0).toUpperCase()+item.substring(1);
+    })"></span>-->
+
+    <!--  使用普通方法  -->
+    <!--<span v-text="toUp(text)"></span>-->
+
+    <!--
+        使用过滤器
+        过滤器的语法：按照竖线分隔，把竖线左侧的值传传递给右侧的过滤方法，经过方法的处理，把处理后的结果
+        展示在视图中
+
+        过滤器方法只能在胡子语法{{ }} 和 v-bind 中使用（过滤器的方法没有挂载到实例上）
+    -->
+    <!--<h1>{{ text | filterA }}</h1>-->
+    <h1>{{text|toUp|filterB}}</h1>
+    <!--<img :src="pic|picHandle" alt="">-->
+</div>
+
+<!-- import js -->
+<!--  开发的时候尽可通用引用未压缩版本，这样有错误会抛出异常  -->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            // =》 响应试数据：data 中准备的要在视图中渲染的数据（model）
+            text: '',
+        },
+        methods: {
+            /*
+              => 都会挂载到实例上，（不能和 data 中的属性名冲突）：这里的制定的方法是普通方法
+                 可以在视图中调取使用，也可以在其它方法中调取使用
+             */
+            toUp(value){
+                return value.replace(/\b[a-zA-Z]+\b/g, item => {
+                    return item.charAt(0).toUpperCase()+item.substring(1);
+                });
+            },
+            AA(){
+                this.toUp('');
+            },
+        },
+        filters: {
+            /*
+              => 设置过滤器：把需要在视图中的渲染的数据进行二次或者多的处理
+
+             */
+            toUp(value) {
+                // =》 value：需要过虑的数据 return 返回的是过虑后的结果
+                return value.replace(/\b[a-zA-Z]+\b/g, item => {
+                    return item.charAt(0).toUpperCase()+item.substring(1);
+                });
+            },
+            filterB(value){
+                return value.split('').reverse().join('');
+            },
+            /*picHandle(value){
+                return value.length === 0 ? 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=273222513,3973617089&fm=26&gp=0.jpg': value;
+            }*/
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{ msg }}
+    </div>
+
+    <div id="box">
+        <p>{{ n }}</p>
+        <div>
+            <button @click="handle">点我呀~~~</button>
+            <button v-on:click="handle">点我呀~~~</button>
+        </div>
+    </div>
+
+    <!--  import js  -->
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 传统的方式
+        // 把 msg 数据绑定在页面 #app 中，一秒后，让数据更改，同时希望视图也跟着更改
+        let msg = 'hello world~~~';
+
+
+
+        // => 每当创建一个实例，就相当于创建一个 vieModel 监听器：可以监听对应视频和对应数据相互改变
+        let vm1 = new Vue({
+            el: '#app', // => el: element 当前监听器监听的视图(基于 querySelector 获取 )
+            data: {     // => data: 当前监听器监听的数据(这些监听的数据会挂载到 vm1 实例上, 也就是 vm1.msg=xxx来操作了)
+                msg,
+            }
+        });
+
+        setTimeout(() => {
+            vm1 = '你好世界~~~';
+        }, 1000);
+
+        /*------------------------------------------*/
+        let vm2 = new Vue({
+            el: '#box',
+            data: {
+                n: 0,
+            },
+            methods:{// => methods 放视图、需要使用的方法
+                handle(){
+                    // this:vm2
+                    this.n++;
+                }
+            }
+        })
+
+        // 传统的写法
+        /*let box = document.querySelector('#box'),
+            span = box.querySelector('p'),
+            button = box.querySelector('button');
+
+        span.innerHTML = 0;
+        button.onclick = () => {
+            span.innerHTML++;
+        }*/
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{ msg }}</h1>
+
+</div>
+<!-- import js -->
+<!--  开发的时候尽可通用引用未压缩版本，这样有错误会抛出异常  -->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'Hello Vue!',
+        }
+    })
+
+</script>
+
+</body>
+</html>

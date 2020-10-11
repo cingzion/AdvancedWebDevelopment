@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11-基于computed实现全选和非全选.html</title>
+</head>
+<body>
+
+<div id="app">
+    <label><input type="checkbox" v-model="selected" @change="handle" />全选/非全选</label>
+    <hr/>
+    <span v-for="item in hobbyList">
+        <label :key="item.id | handleID"><input type="checkbox" :value="item.value" v-model="checkList"/>{{item.name}}</label>
+    </span>
+</div>
+
+<!-- import js -->
+<!--  开发的时候尽可通用引用未压缩版本，这样有错误会抛出异常  -->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            hobbyList: [
+                {
+                    id: 1,
+                    name: '唱歌',
+                    value: 'song',
+                },
+                {
+                    id: 2,
+                    name: '跳舞',
+                    value: 'dance',
+                },
+                {
+                    id: 3,
+                    name: '阅读',
+                    value: 'read',
+                },
+                {
+                    id: 4,
+                    name: '睡觉',
+                    value: 'sleep',
+                },
+            ],
+            // 存储选中的兴趣爱好
+            checkList: [],
+            // 存储全选按钮的选中状态
+            selected: false,
+        },
+        /*
+          => watch 监听响应式数据的改变(watch中监听的响应式数据必须在 data 中初始化) 和
+              computed 中的 setter 类似，只不过 computed 是自己单独设置的计算属性(不能和
+              data中的冲突), 而 watch 只能监听 data 中有的属性
+
+         => 监听器支持异步操作 computed 的 getter 不支持异步获取数据
+         */
+        watch: {
+            checkList() {
+                this.selected = this.checkList.length === this.hobbyList.length ? true: false;
+            }
+        },
+        methods: {
+            handle() {
+                if(this.selected) {
+                    this.hobbyList.forEach(item => {
+                        this.checkList.push(item.value);
+                    });
+                    return;
+                }
+                this.checkList = [];
+            },
+        },
+        // 过滤器
+        filters: {
+            handleID(value) {
+                return 'hobby'+value;
+            }
+        }
+    });
+
+
+</script>
+</body>
+</html>
