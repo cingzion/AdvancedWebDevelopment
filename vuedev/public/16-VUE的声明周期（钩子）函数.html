@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>课时16：VUE的声明周期（钩子）函数</title>
+</head>
+<body>
+<div id="app">
+    <!--<h1>{{ msg }}</h1>-->
+
+</div>
+<!-- import vue js  -->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    /**
+     * 生命周期函数(钩子函数)
+     *
+     * beforeCreate     创建 Vue 实例之前
+     * created          创建实例成(一般在这里实现数据的异步请求)
+     * beforeMount      渲染 DOM 之前(加载组件第一次渲染)
+     * mounted          渲染 DOM 完成(加载组件第一次渲染)
+     * beforeUpdate     重新渲染之前(数据更新等做控制 DOM 重新渲染)
+     * updated          重再渲染完成
+     * beforeDestory    销毁之前
+     * destory          销毁完成
+     *
+     */
+    const vm = new Vue({
+        el: '#app',
+        template: `<h1>{{ msg }}</h1>`,
+        beforeMount() {
+            console.log(document.getElementById('app'));
+        },
+        mounted() {
+            console.log(document.getElementById('app'))
+        },
+        data: {
+            msg: '你好，生命周期！！333'
+        }
+    });
+    // vm.$mount("#app");
+    // => 指定当前 vm 所关联的视图
+
+    // vm.$destroy();
+    // => 销毁之后，再去修改响应式数据值，视图也不会在重新的渲染了
+    console.log(vm)
+</script>
+</body>
+</html>

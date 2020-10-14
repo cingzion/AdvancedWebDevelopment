@@ -1,4 +1,4 @@
-## 课时1：基础概述：类库和框架的区别以及市场中主流框架的现状
+## 1：基础概述：类库和框架的区别以及市场中主流框架的现状
 - 1、类库
 > JQuery、Zepto、underscore....
 类库提供的是真实项目中常用到的方法，它是一个工具包，基于这个工具包可以快速开发任何的项目
@@ -23,7 +23,7 @@ UI组件库一般是多个插件的集合体，不公提供了JS对应的功能�
 - Vue 我们现在学习和使用的是第二代版本：尤雨溪
 
 
-## 课时2：VUE是渐进式框架
+## 2：VUE是渐进式框架
 > 什么是渐进式框架：类库或者框架都是重量级的，里面包含很多方法，但是实际项目开发中，我们用不到这么多东西，所以在开发他们的时候，会把功能按照模块进行单独开发，使用者可根据自身情况选择一个模块一个模块的导入使用
 
 - vue：基础模块(基础语法、核心实现、组件开发、相关指令等都在这里)
@@ -35,7 +35,7 @@ UI组件库一般是多个插件的集合体，不公提供了JS对应的功能�
 - ... 这些东西就是 VUE 全家桶
 
 
-## 课时3：VUE是MVVM双向数据绑定的框架
+## 3：VUE是MVVM双向数据绑定的框架
 - MVC & MVVM
 > 传统操作 DOM 模式
 - MVC: model view controller
@@ -182,7 +182,7 @@ UI组件库一般是多个插件的集合体，不公提供了JS对应的功能�
     </html>
 ```
 
-## 课时4：VUE的基础语法：数据修改时的细节问题
+## 4：VUE的基础语法：数据修改时的细节问题
 - 案例
 ```jsx harmony
 
@@ -268,7 +268,7 @@ UI组件库一般是多个插件的集合体，不公提供了JS对应的功能�
     </html>
 ```
 
-## 课时5：VUE的常规指令1
+## 5：VUE的常规指令1
 > 常用的指令( directive )
 - v-model
 - v-html / v-text: 取消小胡子语法刷新中的闪烁问题
@@ -368,7 +368,7 @@ UI组件库一般是多个插件的集合体，不公提供了JS对应的功能�
     </html>
 ```
 
-## 课时6：VUE的常规指令2：循环处理
+## 6：VUE的常规指令2：循环处理
 ```jsx harmony
     
     <!doctype html>
@@ -484,7 +484,7 @@ UI组件库一般是多个插件的集合体，不公提供了JS对应的功能�
     </html>
 ```
 
-## 课时7：VUE的常规指令2：事件处理
+## 7：VUE的常规指令2：事件处理
 ```jsx harmony
     
     <!doctype html>
@@ -561,7 +561,7 @@ UI组件库一般是多个插件的集合体，不公提供了JS对应的功能�
     </html>
 ```
 
-## 课时8：VUE中的表单元素处理
+## 8：VUE中的表单元素处理
 ```jsx harmony
     
     <!doctype html>
@@ -641,7 +641,7 @@ UI组件库一般是多个插件的集合体，不公提供了JS对应的功能�
 ```
 
 
-## 课时9：filters过滤器方法
+## 9：filters过滤器方法
 - 计算属性、过滤器、监听器
     + methods 普通方法
     + filters 过滤器
@@ -653,7 +653,7 @@ UI组件库一般是多个插件的集合体，不公提供了JS对应的功能�
            <html lang="en">
            <head>
                <meta charset="UTF-8">
-               <title>课时9：filters过滤器方法</title>
+               <title>9：filters过滤器方法</title>
            </head>
            <body>
            
@@ -884,7 +884,7 @@ UI组件库一般是多个插件的集合体，不公提供了JS对应的功能�
      
     
     
-## 课时10：computed 计算属性
+## 10：computed 计算属性
 ```jsx harmony
       
       <!DOCTYPE html>
@@ -961,7 +961,7 @@ UI组件库一般是多个插件的集合体，不公提供了JS对应的功能�
       </html>
 ```
 
-## 课时12：watch监听器
+## 12：watch监听器
 - 当需要在数据变化的执行异步或者开销较大的操作时应用监听器
 - 小练习：全选和非全选
 - 小练习：数据异步绑定的处理
@@ -1054,7 +1054,7 @@ UI组件库一般是多个插件的集合体，不公提供了JS对应的功能�
     </html>
 ```
 
-## 课时13：class和style的处理
+## 13：class和style的处理
 ```jsx harmony
     <!DOCTYPE html>
     <html lang="en">
@@ -1122,7 +1122,391 @@ UI组件库一般是多个插件的集合体，不公提供了JS对应的功能�
     </html>
 ```
 
-## 课时14 基于VUE实现选项卡案例
+## 14 基于VUE实现选项卡案例
+- 14-1-基于VUE实现选项卡案例
+```jsx harmony
+    
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>14-基于VUE实现选项卡案例.html</title>
+        <link href="https://cdn.bootcdn.net/ajax/libs/minireset.css/0.0.2/minireset.min.css" rel="stylesheet">
+    
+        <style>
+            .tabBox{
+                box-sizing: border-box;
+                margin: 20px auto;
+                width: 600px;
+            }
+    
+            .tabBox .tab{
+                display: flex;
+                position: relative;
+                top: 1px;
+    
+            }
+    
+            .tabBox .tab li{
+                margin-right: 10px;
+                padding: 0 20px;
+                line-height: 35px;
+                border:1px solid #aaa;
+                background: #eee;
+                cursor: pointer;
+            }
+            .tabBox .tab li.active{
+                background: #FFF;
+                border-bottom-color: #FFF;
+            }
+    
+            .tabBox .content {
+                display: none;
+                box-sizing: border-box;
+                padding: 10px;
+                height: 300px;
+                border: 1px solid #aaa;
+            }
+    
+            .tabBox .content.active{
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <h1 v-html="msg"></h1>
+    
+            <div class="tabBox">
+                <ul class="tab" @click="handleTab($event)">
+                    <!--<li v-for="(item, index) in tabData" v-html="item.name" :class="{active: index === curIndex}" @click="curIndex=index"></li>-->
+                    <li v-for="(item, index) in tabData" v-html="item.name" :class="{active: index === curIndex}" :index="index"></li>
+                </ul>
+                <div v-for="(item, index) in tabData" v-html="item.children" :class="{content: true, active: index === curIndex}">音乐的内容</div>
+    
+            </div>
+    
+        </div>
+        <!-- import js -->
+        <!--  开发的时候尽可通用引用未压缩版本，这样有错误会抛出异常  -->
+        <script src="../node_modules/vue/dist/vue.js"></script>
+        <script>
+    
+            let tabData = [
+                {
+                    id: 1,
+                    name: '音乐',
+                    children: '音乐的内容',
+                },
+                {
+                    id: 2,
+                    name: '影视',
+                    children: '影视的内容',
+                },
+                {
+                    id: 3,
+                    name: '动漫',
+                    children: '动漫的内容',
+                },
+                {
+                    id: 4,
+                    name: '记录版',
+                    children: '记录版的内容',
+                },
+            ];
+    
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'Hello Vue!',
+                    // 选项卡数据
+                    tabData,
+                    // 展示选项卡的索引
+                    curIndex: 0,
+                },
+                methods: {
+                    handleTab(ev) {
+                        let target = ev.target,
+                            tarTag = target.tagName;
+                        console.log("===", ev.target)
+    
+                        if(tarTag === 'LI') {
+                            this.curIndex = parseInt(target.getAttribute('index'));
+                        }
+                    }
+                }
+            })
+    
+        </script>
+    
+    </body>
+    </html>
+```
+- 14-2-基于VUE实现选项卡案例
+```jsx harmony
+    
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>14-基于VUE实现选项卡案例.html</title>
+        <link href="https://cdn.bootcdn.net/ajax/libs/minireset.css/0.0.2/minireset.min.css" rel="stylesheet">
+    
+        <style>
+            .tabBox{
+                box-sizing: border-box;
+                margin: 20px auto;
+                width: 600px;
+            }
+    
+            .tabBox .tab{
+                display: flex;
+                position: relative;
+                top: 1px;
+    
+            }
+    
+            .tabBox .tab li{
+                margin-right: 10px;
+                padding: 0 20px;
+                line-height: 35px;
+                border:1px solid #aaa;
+                background: #eee;
+                cursor: pointer;
+            }
+            .tabBox .tab li.active{
+                background: #FFF;
+                border-bottom-color: #FFF;
+            }
+    
+            .tabBox .content {
+                box-sizing: border-box;
+                padding: 10px;
+                height: 300px;
+                border: 1px solid #aaa;
+            }
+    
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <h1 v-html="msg"></h1>
+    
+            <div class="tabBox">
+                <ul class="tab">
+                    <li v-for="(item, index) in tabData" v-html="item.name" :class="{active: index === curIndex}" @click="handleLi($event, index, item.id)"></li>
+                </ul>
+                <div class="content" v-html="content"></div>
+            </div>
+    
+        </div>
+        <!-- import js -->
+        <!--  开发的时候尽可通用引用未压缩版本，这样有错误会抛出异常  -->
+        <script src="../node_modules/vue/dist/vue.js"></script>
+        <script src="../node_modules/axios/dist/axios.min.js"></script>
+        <script>
+    
+            let tabData = [
+                {
+                    id: 1,
+                    name: '音乐',
+                    children: '音乐的内容',
+                },
+                {
+                    id: 2,
+                    name: '影视',
+                    children: '影视的内容',
+                },
+                {
+                    id: 3,
+                    name: '动漫',
+                    children: '动漫的内容',
+                },
+                {
+                    id: 4,
+                    name: '记录版',
+                    children: '记录版的内容',
+                },
+            ];
+    
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'Hello Vue!',
+                    // 选项卡数据
+                    tabData,
+                    // 展示选项卡的索引
+                    curIndex: 0,
+                    // 内容区域的数据
+                    content: '',
+                },
+                created(){
+                  /*
+                   => 生命周期函数(vue实例创建成功)
+    
+                   */
+                    this.queryData(tabData[this.curIndex]['id']);
+                },
+                methods: {
+                    queryData(curId) {
+                        axios.get('./data/data.json').then(response => {
+    
+                            return response.data;
+                        }).then(result => {
+                            console.log(result)
+                            let itemData = result.find(item => parseInt(item.id)) === parseInt(curId);
+    
+                            if(itemData){
+                                this.content = itemData.content;
+                                return;
+                            }
+                            return Promise.reject();
+                        }).catch(reason => {
+                            this.content = '查无此信息';
+                        });
+                    },
+                    handleLi(ev, index, id) {
+                        if(this.curIndex === index) return;
+    
+                        this.curIndex = index;
+                        this.queryData(id);
+                    }
+                }
+            })
+    
+        </script>
+    
+    </body>
+    </html>
+```
+
+
+## 15 基于VUE实现购物车计算器
+- 实现购物车计算器
+
+
+## 16：VUE的声明周期（钩子）函数
+```jsx harmony
+
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>16：VUE的声明周期（钩子）函数</title>
+    </head>
+    <body>
+    <div id="app">
+        <!--<h1>{{ msg }}</h1>-->
+    
+    </div>
+    <!-- import vue js  -->
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        /**
+         * 生命周期函数(钩子函数)
+         *
+         * beforeCreate     创建 Vue 实例之前
+         * created          创建实例成(一般在这里实现数据的异步请求)
+         * beforeMount      渲染 DOM 之前(加载组件第一次渲染)
+         * mounted          渲染 DOM 完成(加载组件第一次渲染)
+         * beforeUpdate     重新渲染之前(数据更新等做控制 DOM 重新渲染)
+         * updated          重再渲染完成
+         * beforeDestory    销毁之前
+         * destory          销毁完成
+         *
+         */
+        const vm = new Vue({
+            el: '#app',
+            template: `<h1>{{ msg }}</h1>`,
+            beforeMount() {
+                console.log(document.getElementById('app'));
+            },
+            mounted() {
+                console.log(document.getElementById('app'))
+            },
+            data: {
+                msg: '你好，生命周期！！333'
+            }
+        });
+        // vm.$mount("#app");
+        // => 指定当前 vm 所关联的视图
+    
+        // vm.$destroy();
+        // => 销毁之后，再去修改响应式数据值，视图也不会在重新的渲染了
+        console.log(vm)
+    </script>
+    </body>
+    </html>
+```
+
+## 17：基于$refs获取DOM元素
+```jsx harmony
+
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>17：基于$refs获取DOM元素</title>
+    </head>
+    <body>
+    <div id="app">
+        <h1 v-html="msg" ref="titleBox"></h1>
+    
+    </div>
+    <!-- import vue js  -->
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        /**
+         * 生命周期函数(钩子函数)
+         *
+         * beforeCreate     创建 Vue 实例之前
+         * created          创建实例成(一般在这里实现数据的异步请求)
+         * beforeMount      渲染 DOM 之前(加载组件第一次渲染)
+         * mounted          渲染 DOM 完成(加载组件第一次渲染)
+         * beforeUpdate     重新渲染之前(数据更新等做控制 DOM 重新渲染)
+         * updated          重再渲染完成
+         * beforeDestory    销毁之前
+         * destory          销毁完成
+         *
+         */
+    
+        /**
+         *
+         * => vue 框架开发的时候，我们应该尽可可减少直接去操作 DOM
+         * => 我们基于 ref 可以把当前元素放置到 this.$refs 对象中，从而实现对 DOM 的直接操作(
+         *    只有在 mounted 及之后才可以获取)
+         *
+         */
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '你好，生命周期！！333'
+            },
+            beforeMount() {
+                console.log(this.$refs) // {titleBox: h1}
+    
+            },
+    
+        });
+        // vm.$mount("#app");
+        // => 指定当前 vm 所关联的视图
+    
+        // vm.$destroy();
+        // => 销毁之后，再去修改响应式数据值，视图也不会在重新的渲染了
+        console.log(vm)
+    </script>
+    </body>
+    </html>
+```
+## 18：基于VUE实现商城类别筛选
+- 案例
+
 
     
     

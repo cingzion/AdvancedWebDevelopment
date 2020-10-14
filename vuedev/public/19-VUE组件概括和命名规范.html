@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>19：VUE组件概括和命名规范</title>
+</head>
+<body>
+<div id="app">
+    <h1 v-html="title" ref="titleBox"></h1>
+    <mybutton></mybutton>
+</div>
+<!-- import vue js  -->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    /**
+     * 生命周期函数(钩子函数)
+     *
+     * beforeCreate     创建 Vue 实例之前
+     * created          创建实例成(一般在这里实现数据的异步请求)
+     * beforeMount      渲染 DOM 之前(加载组件第一次渲染)
+     * mounted          渲染 DOM 完成(加载组件第一次渲染)
+     * beforeUpdate     重新渲染之前(数据更新等做控制 DOM 重新渲染)
+     * updated          重再渲染完成
+     * beforeDestory    销毁之前
+     * destory          销毁完成
+     *
+     */
+
+    /**
+     * 组件的特点：
+     *    - 可复用
+     *    - 方便维护
+     *    - 每一个 vue 组件都是一个独立的个体(独立的 vm 实例)：data 是独立的(不同组件的
+     *      data应该互不干扰)、有完整的生命周期、方法等也是独立的
+     *    - 能够实现组件嵌套：需要掌握组件之间的信息通信
+     * @type {Vue}
+     */
+
+    /**
+     * 全局组件：无需单独引用或者配置，直接在大组件中调取全局组件即可
+     *
+     *   Vue.component(componentName, options);
+     *       + options 可以使用的 vm 实例须具备的一切(data、methods、生命周期)
+     *       + 每调用一次组件都是创建一个单独的 vue 实例 (VueComponent -> Vue)
+     *
+     *   组件命名的规则
+     *       + kebab-case: 横线做分隔符
+     *          Vue.component('my-button', {
+                    template: `<button>组件中的按钮</button>`,
+                    created() {
+                        console.log(this)
+                    },
+
+                })
+     *       + PasalCase: 单词首字母大写， 也是基于 kebab
+     *         方式调用
+     *       + 调取组件的时候，会把所有的组件单词渲染为小写字母(我们命名的时候除 PasalCase
+     *         模式外，我们都要把组件名设置为小写，调取组件的时候可以是大写也要吧是小写(最后都是
+     *         按照小写渲染的))
+     *
+     *       + 命名的时候尽量不要出现其余的特殊字符
+     *
+     * @type {Vue}
+     */
+    /*Vue.component('my-button', {
+        template: `<button>组件中的按钮</button>`,
+        created() {
+            console.log(this)
+        },
+
+    })*/
+
+    Vue.component('mybutton', {
+        template: `<button>组件中的按钮</button>`,
+        created() {
+            console.log(this)
+        },
+
+    })
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            title: '你好，Vue！！333'
+        },
+        beforeMount() {
+            console.log(this.$refs) // {titleBox: h1}
+
+        },
+
+    });
+
+</script>
+</body>
+</html>
